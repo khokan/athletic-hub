@@ -1,0 +1,35 @@
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background-color: #6b7280;
+    opacity: 0.5;
+  }
+  
+  .swiper-pagination-bullet-active {
+    background-color: #4f46e5; /* primary color */
+    opacity: 1;
+  }
+  
+  .swiper-button-next, 
+  .swiper-button-prev {
+    color: #4f46e5; /* primary color */
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .swiper-button-next::after, 
+  .swiper-button-prev::after {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+  }
+
