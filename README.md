@@ -14,7 +14,7 @@ AthleticHub is a full-stack athletic event booking platform that connects athlet
 
 ---
 
-**Live Site Link:** [https://b11a11-client-side-92d22.web.app/](https://athletic-hub.web.app/)
+**Live Site Link:** [https://athletic-hub.web.app/](https://athletic-hub.web.app/)
 
 - **GitHub Repository (Client):** [https://github.com/khokan/athletic-hub/tree/main/client](https://github.com/khokan/athletic-hub/tree/main/client)
 - **GitHub Repository (Server):** [https://github.com/khokan/athletic-hub/tree/main/server](https://github.com/khokan/athletic-hub/tree/main/server)
