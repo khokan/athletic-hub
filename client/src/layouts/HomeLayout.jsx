@@ -16,7 +16,7 @@ const HomeLayout = () => {
             <NavBar />
           </header>
 
-          <main className="w-11/12 mx-auto min-h-[calc(100vh-350px)]">
+          <main className="mx-auto min-h-[calc(100vh-350px)] mt-16 ">
             {state == "loading" ? (
               <div className="text-center">
                 <span className="loading loading-bars loading-xl"></span>{" "}

@@ -12,6 +12,7 @@ import {
 
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
+import { Link } from "react-router";
 
 const sports = [
   { name: "Sprinting", icon: <FaRunning />, count: 14 },
@@ -35,7 +36,8 @@ const Home = () => {
         <section className="mb-5">
           <Featured />
         </section>
-        <section className="py-16 bg-muted text-center rounded-xl">
+        <div className="px-4 sm:px-6 lg:px-8">
+           <section className="py-8 bg-muted text-center rounded-xl  ">
           <h2 className="text-3xl font-bold text-primary mb-8 animate-pulse">
             🏅 Popular Sports
           </h2>
@@ -59,6 +61,23 @@ const Home = () => {
             ))}
           </div>
         </section>
+        </div>
+       
+       {/* CTA */}
+         <div className="px-4 sm:px-6 lg:px-8 py-8">
+      <section className="bg-muted text-white p-8 rounded-xl text-center">
+        <h2 className="text-2xl text-muted-foreground font-bold mb-4">Ready to Join the AthleticHub Community?</h2>
+        <p className="mb-6 text-muted-foreground max-w-2xl mx-auto">
+          Whether you're looking to compete, organize, or just enjoy sports events, we've got you covered.
+        </p>
+        <Link to="/registration">
+        <Button>
+          Sign Up Now
+        </Button>
+        </Link>
+      </section>
+      </div>
+
         <section className="py-16 text-center">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
@@ -100,6 +119,7 @@ const Home = () => {
             ))}
           </div>
         </section>
+         
       </div>
     </>
   );

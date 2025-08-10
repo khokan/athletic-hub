@@ -90,6 +90,20 @@ const NavBar = () => {
       <NavLink to="/events" className={navLinkClass}>
         Events
       </NavLink>
+
+      {user && (
+    <>
+      <NavLink to="/createEvent" className={navLinkClass}>
+        Create Event
+      </NavLink>
+      <NavLink to="/myBookings" className={navLinkClass}>
+        My Bookings
+      </NavLink>
+      <NavLink to="/manageEvents" className={navLinkClass}>
+        Manage Events
+      </NavLink>
+    </>
+  )}
     </>
   );
 
@@ -97,7 +111,7 @@ const NavBar = () => {
     <>
       {user ? (
         <>
-          <DropdownMenu>
+          {/* <DropdownMenu>
             <DropdownMenuTrigger>
               <Avatar className="h-10 w-10">
                 <AvatarImage src={user.photoURL} alt={user.displayName} />
@@ -147,7 +161,10 @@ const NavBar = () => {
                 </ul>
               )}
             </PopoverContent>
-          </Popover>
+          </Popover> */}
+            <Avatar className="h-10 w-10">
+                <AvatarImage src={user.photoURL} alt={user.displayName} />
+            </Avatar>
           <Button onClick={handleSignOut}>Logout</Button>
         </>
       ) : (
@@ -159,7 +176,7 @@ const NavBar = () => {
   );
 
   return (
-    <div className="w-11/12 mx-auto my-3 bg-muted shadow-md hover:shadow-lg dark:shadow-gray-600 transition-shadow p-2 font-semibold rounded-xl">
+    <div className="fixed top-0 left-0 right-0 z-50 mx-auto bg-muted shadow-md hover:shadow-lg dark:shadow-gray-600 transition-shadow p-2 font-semibold rounded-xl">
       <div className="flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center gap-2 font-bold text-xl">

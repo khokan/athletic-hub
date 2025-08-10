@@ -11,6 +11,10 @@ import ManageEvents from "../components/pages/Event/ManageEvents";
 import MyBookings from "../components/pages/Event/MyBookings";
 import PrivateRouter from "./PrivateRouter";
 import ErrorPage from "../shared/ErrorPage";
+import AboutPage from "../components/pages/About";
+import Team from "../components/pages/Team";
+import ContactPage from "../components/pages/Contact";
+import FAQPage from "../components/pages/Faq";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +64,22 @@ const router = createBrowserRouter([
       {
         path: "updateEvent/:id",
         Component: UpdateEvent,
+      },
+      {
+        path: "about",
+        Component: AboutPage,
+      },
+       {
+        path: "team",
+        Component: Team,
+      },
+       {
+        path: "contact",
+        Component: ContactPage,
+      },
+      {
+        path: "faq",
+        Component: FAQPage,
       },
       {
         path: "manageEvents",

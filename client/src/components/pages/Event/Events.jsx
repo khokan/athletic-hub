@@ -43,8 +43,8 @@ const AllEventsPage = () => {
     if (newEvents.length > 0) setEvents(newEvents);
   };
   return (
-    <div>
-      <h1 className="text-4xl font-bold text-primary text-center mb-10">
+    <div className="px-4 sm:px-6 lg:px-8">
+      <h1 className="text-4xl font-bold text-primary text-center m-10">
         All Upcoming Athletic Events
       </h1>
 

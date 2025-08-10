@@ -23,7 +23,7 @@ const Featured = () => {
   }, []);
 
   return (
-    <div>
+    <div className="px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-primary">Featured Events</h1>
       </div>
