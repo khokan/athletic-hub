@@ -1,7 +1,5 @@
 import { format } from "date-fns";
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router";
 import { Button } from "@/components/ui/button";
@@ -16,38 +14,50 @@ import {
 } from "@/components/ui/card";
 
 const AllEventsPage = () => {
-  const [events, setEvents] = useState([]);
   const eventsData = useLoaderData();
+  const [events, setEvents] = useState([]);
   const [text, setText] = useState("");
-  useEffect(() => {
-    // Format date on load
-    const formattedEvents = eventsData
-      .sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate))
+  const [sortOrder, setSortOrder] = useState("newest");
+
+  // Helper: Sort and format
+  const sortAndFormat = (data, order = "newest") => {
+    return data
+      .sort((a, b) =>
+        order === "newest"
+          ? new Date(b.eventDate) - new Date(a.eventDate)
+          : new Date(a.eventDate) - new Date(b.eventDate)
+      )
       .map((e) => ({
         ...e,
         formattedDate: format(new Date(e.eventDate), "dd MMM yyyy"),
       }));
-
-    setEvents(formattedEvents);
-  }, []);
-  const handleSearch = (text) => {
-    if (text === "") {
-      setEvents(eventsData);
-      return;
-    }
-    const newEvents = eventsData.filter(
-      (event) =>
-        event?.eventName?.toLowerCase().includes(text.toLowerCase()) ||
-        event.location.toLowerCase().includes(text.toLowerCase())
-    );
-    if (newEvents.length > 0) setEvents(newEvents);
   };
+
+  useEffect(() => {
+    setEvents(sortAndFormat(eventsData, sortOrder));
+  }, [eventsData, sortOrder]);
+
+  const handleSearch = (textValue) => {
+    let filteredEvents = eventsData;
+
+    if (textValue !== "") {
+      filteredEvents = eventsData.filter(
+        (event) =>
+          event?.eventName?.toLowerCase().includes(textValue.toLowerCase()) ||
+          event.location.toLowerCase().includes(textValue.toLowerCase())
+      );
+    }
+
+    setEvents(sortAndFormat(filteredEvents, sortOrder));
+  };
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <h1 className="text-4xl font-bold text-primary text-center m-10">
         All Upcoming Athletic Events
       </h1>
 
+      {/* Search & Sort Controls */}
       <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-8">
         <Input
           value={text}
@@ -60,11 +70,24 @@ const AllEventsPage = () => {
           type="text"
           placeholder="Search by name or location"
         />
+
+        <select
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+          className="border rounded-md p-2"
+        >
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+        </select>
       </div>
 
+      {/* Event Cards */}
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {events.map((event) => (
-          <Card key={event._id} className="hover:shadow-xl transition-shadow justify-between">
+          <Card
+            key={event._id}
+            className="hover:shadow-xl transition-shadow justify-between"
+          >
             <div className="relative h-48 w-full overflow-hidden">
               <img
                 src={event.eventImage}

@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdEmail } from "react-icons/md";
 import { Button } from "../components/ui/button";
+import toast from "react-hot-toast";
 
 const Footer = () => {
+
+  const [email, setEmail] = useState('');
+
+  const handleSubscribe = () => {
+    // Simple email validation
+    if (!email.includes('@') || !email.includes('.')) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+
+    toast.success('Thank you for subscribing!');
+    setEmail(''); // Clear input after submission
+  };
+
   return (
     
    <div className=" my-3  shadow-md hover:shadow-sm transition-shadow mb-5">
@@ -23,21 +38,23 @@ const Footer = () => {
         </p>
 
         {/* Email Subscription */}
-        <div className="flex justify-center mb-10">
-          <div className="flex w-full max-w-2xl text-black bg-white rounded-lg overflow-hidden">
-            <input
-              type="email"
-              placeholder="Enter Email Address"
-              className="w-full px-4 py-3 text-black outline-none"
-            />
-            <div className="bg-white flex items-center px-4">
-              <MdEmail className="text-gray-500" size={22} />
-            </div>
-            <Button className="px-6 py-6 cursor-pointer">
-              Subscribe
-            </Button>
-          </div>
+       <div className="flex justify-center mb-10">
+      <div className="flex w-full max-w-2xl text-black bg-white rounded-lg overflow-hidden border">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter Email Address"
+          className="w-full px-4 py-3 text-black outline-none"
+        />
+        <div className="bg-white flex items-center px-4 border-l">
+          <MdEmail className="text-gray-500" size={22} />
         </div>
+         <Button className="px-6 py-6 cursor-pointer"  onClick={handleSubscribe}>
+          Subscribe
+        </Button>
+      </div>
+    </div>
 
         {/* Navigation Links */}
         <nav className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 text-sm font-semibold">

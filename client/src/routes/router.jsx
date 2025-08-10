@@ -25,11 +25,13 @@ const router = createBrowserRouter([
         index: true,
         Component: Home,
         loader: () => fetch(`${import.meta.env.VITE_NODE_SERVER_URL}/events`),
-        hydrateFallbackElement: (
-          <div className="text-center">
-            <span className="loading loading-bars loading-xl"></span>{" "}
-          </div>
-        ),
+        hydrateFallbackElement: () => {
+          return (
+            <div className="text-center">
+              <span className="loading loading-bars loading-xl"></span>
+            </div>
+          );
+        },
       },
       {
         path: "login",

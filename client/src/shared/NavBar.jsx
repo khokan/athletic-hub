@@ -90,7 +90,6 @@ const NavBar = () => {
       <NavLink to="/events" className={navLinkClass}>
         Events
       </NavLink>
-
       {user && (
     <>
       <NavLink to="/createEvent" className={navLinkClass}>
@@ -102,8 +101,12 @@ const NavBar = () => {
       <NavLink to="/manageEvents" className={navLinkClass}>
         Manage Events
       </NavLink>
+      
     </>
   )}
+   <NavLink to="/contact" className={navLinkClass}>
+        Contact
+      </NavLink>
     </>
   );
 
@@ -162,7 +165,7 @@ const NavBar = () => {
               )}
             </PopoverContent>
           </Popover> */}
-            <Avatar className="h-10 w-10">
+            <Avatar className="h-8 w-8">
                 <AvatarImage src={user.photoURL} alt={user.displayName} />
             </Avatar>
           <Button onClick={handleSignOut}>Logout</Button>
