@@ -44,9 +44,7 @@ const router = createBrowserRouter([
       {
         path: "/events/:id",
         element: (
-          <PrivateRouter>
             <EventDetails />
-          </PrivateRouter>
         ),
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_NODE_SERVER_URL}/events/${params.id}`),

@@ -43,7 +43,7 @@ const AllEventsPage = () => {
     if (newEvents.length > 0) setEvents(newEvents);
   };
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
+    <div>
       <h1 className="text-4xl font-bold text-primary text-center mb-10">
         All Upcoming Athletic Events
       </h1>
@@ -62,9 +62,9 @@ const AllEventsPage = () => {
         />
       </div>
 
-      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {events.map((event) => (
-          <Card key={event._id} className="hover:shadow-xl transition-shadow">
+          <Card key={event._id} className="hover:shadow-xl transition-shadow justify-between">
             <div className="relative h-48 w-full overflow-hidden">
               <img
                 src={event.eventImage}

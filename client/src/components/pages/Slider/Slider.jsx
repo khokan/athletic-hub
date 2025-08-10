@@ -60,7 +60,7 @@ const AthleticHubSlider = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+    <div>
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -85,11 +85,6 @@ const AthleticHubSlider = () => {
               <p className="text-lg text-muted-foreground max-w-2xl">
                 {slide.description}
               </p>
-              {slide.id === 2 && (
-                <Button className="mt-8" variant="default" size="lg">
-                  Start Personalization Quiz
-                </Button>
-              )}
             </div>
           </SwiperSlide>
         ))}
