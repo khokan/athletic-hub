@@ -18,6 +18,7 @@ const AllEventsPage = () => {
   const [events, setEvents] = useState([]);
   const [text, setText] = useState("");
   const [sortOrder, setSortOrder] = useState("newest");
+  const [loading, setLoading] = useState(true);
 
   // Helper: Sort and format
   const sortAndFormat = (data, order = "newest") => {
@@ -34,7 +35,10 @@ const AllEventsPage = () => {
   };
 
   useEffect(() => {
-    setEvents(sortAndFormat(eventsData, sortOrder));
+    if (eventsData) {
+      setEvents(sortAndFormat(eventsData, sortOrder));
+      setLoading(false);
+    }
   }, [eventsData, sortOrder]);
 
   const handleSearch = (textValue) => {
@@ -50,6 +54,14 @@ const AllEventsPage = () => {
 
     setEvents(sortAndFormat(filteredEvents, sortOrder));
   };
+
+  if (loading) {
+    return (
+      <div className="text-center mt-8">
+        <span className="loading loading-bars loading-xl"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
