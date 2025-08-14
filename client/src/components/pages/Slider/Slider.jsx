@@ -15,6 +15,8 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./slider.css"; // Create this file for custom styles
 import { Button } from "@/components/ui/button";
+
+
 const AthleticHubSlider = () => {
   const slides = [
     {
@@ -23,6 +25,7 @@ const AthleticHubSlider = () => {
       description:
         "Stay ahead of the game—explore the latest competitions and sports events happening near you.",
       icon: <FaRunning className="text-5xl mb-4 text-primary" />,
+      image: "https://i.ibb.co.com/MDFRXZPk/slider1.jpg",
       bgColor: "bg-gradient-to-r from-yellow-50 to-orange-50",
     },
     {
@@ -31,6 +34,7 @@ const AthleticHubSlider = () => {
       description:
         "Secure your place in top races, matches, and tournaments. Early registration is now open!",
       icon: <FaSwimmer className="text-5xl mb-4 text-primary" />,
+      image: "https://i.ibb.co.com/gLbtJRLx/slider2.jpg",
       bgColor: "bg-gradient-to-r from-green-50 to-lime-50",
     },
     {
@@ -39,6 +43,7 @@ const AthleticHubSlider = () => {
       description:
         "Access training tips, gear checklists, and schedules to perform your best at upcoming events.",
       icon: <FaDumbbell className="text-5xl mb-4 text-primary" />,
+      image: "https://i.ibb.co.com/VpPcLChc/slider3.jpg",
       bgColor: "bg-gradient-to-r from-pink-50 to-rose-50",
     },
     {
@@ -47,6 +52,7 @@ const AthleticHubSlider = () => {
       description:
         "Challenge your teammates or bring your crew—team registrations and group discounts available.",
       icon: <FaUsers className="text-5xl mb-4 text-primary" />,
+      image: "https://i.ibb.co.com/s9nvxNs7/slider4.jpg",
       bgColor: "bg-gradient-to-r from-indigo-50 to-violet-50",
     },
     {
@@ -55,6 +61,7 @@ const AthleticHubSlider = () => {
       description:
         "Earn recognition, track your progress, and relive moments from past events through highlights and awards.",
       icon: <FaMedal className="text-5xl mb-4 text-primary" />,
+      image: "https://i.ibb.co.com/GQjGyKxq/slider5.jpg",
       bgColor: "bg-gradient-to-r from-sky-50 to-cyan-50",
     },
   ];
@@ -68,29 +75,46 @@ const AthleticHubSlider = () => {
           delay: 5000,
           disableOnInteraction: false,
         }}
-        pagination={{
-          clickable: true,
-        }}
+        pagination={{ clickable: true }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
         className="rounded-xl shadow-lg"
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
-            <div className="bg-muted h-full w-full p-8 md:p-12 flex flex-col items-center justify-center text-center rounded-xl">
-              <div className="mb-6 text-4xl">{slide.icon}</div>
-              <h3 className="text-2xl font-bold mb-4 text-primary">
-                {slide.title}
-              </h3>
-              <p className="text-lg text-muted-foreground max-w-2xl">
-                {slide.description}
-              </p>
-            </div>
-          </SwiperSlide>
+  <div className={`relative w-full h-100 rounded-xl overflow-hidden ${slide.bgColor}`}>
+    {/* Full-width Image without cutting */}
+    {slide.image && (
+      <img
+        src={slide.image}
+        alt={slide.title}
+        className="w-full h-auto object-contain"
+      />
+    )}
+
+    {/* Overlay Content */}
+    <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 md:p-12 bg-black/25">
+      {/* Icon */}
+      <div className="mb-4 text-5xl text-white">{slide.icon}</div>
+
+      {/* Title */}
+      <h3 className="text-2xl md:text-4xl font-bold mb-2 text-white-foreground">
+        {slide.title}
+      </h3>
+
+      {/* Description */}
+      <p className="text-lg md:text-xl text-white-foreground max-w-2xl">
+        {slide.description}
+      </p>
+    </div>
+  </div>
+</SwiperSlide>
+
         ))}
       </Swiper>
     </div>
   );
 };
+
 
 export default AthleticHubSlider;
