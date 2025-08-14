@@ -39,7 +39,14 @@ const EventDetails = () => {
   const eventDateFormatted = format(new Date(event.eventDate), "dd MMM yyyy");
 
   const handleBookNow = async () => {
-    if (!event || !user) return;
+    if (!event) {
+      toast.error("Event details not available.");
+      return;
+    }
+    if (!user || !user.email) {
+      toast.error("You must be logged in to book an event.");
+      return;
+    }
 
     const bookingData = {
       event_id: event._id,
@@ -76,89 +83,91 @@ const EventDetails = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-  <Card className="overflow-hidden">
-    {/* Event Image */}
-    <div className="relative h-64 w-full overflow-hidden">
-      <img
-        src={event.eventImage}
-        alt={event.eventName}
-        className="w-full h-full object-cover"
-      />
+      <Card className="overflow-hidden">
+        {/* Event Image */}
+        <div className="relative h-64 w-full overflow-hidden">
+          <img
+            src={event.eventImage}
+            alt={event.eventName}
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* Header */}
+        <CardHeader>
+          <CardTitle className="text-3xl text-primary">
+            {event.eventName}
+          </CardTitle>
+          <Badge variant="secondary" className="w-fit">
+            {event.eventType}
+          </Badge>
+        </CardHeader>
+
+        {/* Content */}
+        <CardContent className="space-y-4">
+          <p className="text-muted-foreground leading-relaxed">
+            {event.description}
+          </p>
+
+          <div className="space-y-3 text-sm">
+            {/* Location */}
+            <div className="flex items-center gap-2">
+              <FaMapMarkerAlt className="text-primary h-4 w-4" />
+              <span className="font-medium">Location:</span> {event.location}
+            </div>
+
+            {/* Event Date */}
+            <div className="flex items-center gap-2">
+              <FaCalendarAlt className="text-primary h-4 w-4" />
+              <span className="font-medium">Event Date:</span>{" "}
+              {eventDateFormatted}
+            </div>
+
+            <Separator className="my-2" />
+
+            {/* Creator Info */}
+            <div className="flex items-center gap-2">
+              <FaUser className="text-primary h-4 w-4" />
+              <span className="font-medium">Created By:</span>{" "}
+              {event.creatorName}
+            </div>
+            <div className="flex items-center gap-2">
+              <FaEnvelope className="text-primary h-4 w-4" />
+              <span className="font-medium">Email:</span> {event.creatorEmail}
+            </div>
+
+            <Separator className="my-2" />
+
+            {/* Registration Fee */}
+            <div className="flex items-center gap-2">
+              <FaDollarSign className="text-primary h-4 w-4" />
+              <span className="font-medium">Registration Fee:</span> $
+              {event.registrationFee}
+            </div>
+
+            {/* Prizes */}
+            <div className="flex flex-wrap gap-2 mt-1">
+              {event.prizes.map((prize, idx) => (
+                <Badge
+                  key={idx}
+                  variant="outline"
+                  className="text-sm px-2 py-1"
+                >
+                  {prize}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        </CardContent>
+
+        {/* Footer */}
+        <CardFooter>
+          <Button onClick={handleBookNow} className="w-full" size="lg">
+            Book Event
+          </Button>
+        </CardFooter>
+      </Card>
     </div>
-
-    {/* Header */}
-    <CardHeader>
-      <CardTitle className="text-3xl text-primary">
-        {event.eventName}
-      </CardTitle>
-      <Badge variant="secondary" className="w-fit">
-        {event.eventType}
-      </Badge>
-    </CardHeader>
-
-    {/* Content */}
-    <CardContent className="space-y-4">
-      <p className="text-muted-foreground leading-relaxed">
-        {event.description}
-      </p>
-
-      <div className="space-y-3 text-sm">
-        {/* Location */}
-        <div className="flex items-center gap-2">
-          <FaMapMarkerAlt className="text-primary h-4 w-4" />
-          <span className="font-medium">Location:</span> {event.location}
-        </div>
-
-        {/* Event Date */}
-        <div className="flex items-center gap-2">
-          <FaCalendarAlt className="text-primary h-4 w-4" />
-          <span className="font-medium">Event Date:</span> {eventDateFormatted}
-        </div>
-
-        <Separator className="my-2" />
-
-        {/* Creator Info */}
-        <div className="flex items-center gap-2">
-          <FaUser className="text-primary h-4 w-4" />
-          <span className="font-medium">Created By:</span> {event.creatorName}
-        </div>
-        <div className="flex items-center gap-2">
-          <FaEnvelope className="text-primary h-4 w-4" />
-          <span className="font-medium">Email:</span> {event.creatorEmail}
-        </div>
-
-        <Separator className="my-2" />
-
-        {/* Registration Fee */}
-        <div className="flex items-center gap-2">
-          <FaDollarSign className="text-primary h-4 w-4" />
-          <span className="font-medium">Registration Fee:</span> ${event.registrationFee}
-        </div>
-
-        {/* Prizes */}
-        <div className="flex flex-wrap gap-2 mt-1">
-          {event.prizes.map((prize, idx) => (
-            <Badge
-              key={idx}
-              variant="outline"
-              className="text-sm px-2 py-1"
-            >
-              {prize}
-            </Badge>
-          ))}
-        </div>
-      </div>
-    </CardContent>
-
-    {/* Footer */}
-    <CardFooter>
-      <Button onClick={handleBookNow} className="w-full" size="lg">
-        Book Event
-      </Button>
-    </CardFooter>
-  </Card>
-</div>
-
   );
 };
 
